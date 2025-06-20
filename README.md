@@ -22,6 +22,7 @@ Due to the scarcity of real-world drone audio data, we simulate realistic drone 
 
 ```bash
 pip install numpy scipy matplotlib soundfile tqdm...
+```
 
 ## 🚀 Getting Started
 Create a new experiment folde (such as exp1):
