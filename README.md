@@ -125,6 +125,7 @@ python evaluation/eval_runner_main.py \
 ```
 
 ## 📂 Example Directory Structure
+```
 exps/
 └── exp1/
     ├── exp_config.yaml
@@ -134,7 +135,7 @@ exps/
     ├── MicArrayData/
     ├── MicArrayDataTest/
     └── MicArrayDataReal30s/
-
+```
 
 There is a exp_runner.ipynb file so you can run the command codes easily. 
 
