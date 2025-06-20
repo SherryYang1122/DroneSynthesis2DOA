@@ -28,7 +28,6 @@ Create a new experiment folde (such as exp1):
 ```
 mkdir -p exps/exp1
 ```
----
 
 ## 1️⃣ Drone Signal Generation
 Run the following to generate synthetic drone signals:
