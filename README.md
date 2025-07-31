@@ -25,7 +25,7 @@ pip install numpy scipy matplotlib soundfile tqdm...
 ```
 
 ## 🚀 Getting Started
-Create a new experiment folde (such as exp1):
+Create a new experiment folder (such as exp1):
 ```
 mkdir -p exps/exp1
 ```
@@ -53,7 +53,7 @@ Each microphone array configuration includes:
 - Rotation angles (x, y, z in degrees)
 - White noise intensity
 - Side length (for tetra)
-Example configs: mic_config1.yaml, mic_config2.yaml, etc.Reusev301.yaml is an individual configuration with 8 microphones.  
+Example configs: mic_config1.yaml, mic_config2.yaml, etc. Reusev301.yaml is an individual configuration with 8 microphones.  
 
 Output:
 exps/exp1/mic_config.json with microphone coordinates.
@@ -75,7 +75,7 @@ python data_generator/data_generator_main.py \
   --output MicArrayDataTest \
   --drone_data DroneAudioDataTest
 ```
-Please put your background noise folder to data_generator/env, whose wav files are corresponding to the microphone array you choose.
+Please put your background noise folder in data_generator/env, whose wav files are corresponding to the microphone array you choose.
 If --env_path is not provided, background noise is not included.
 The output is multi-channel signals received by the simulated microphone array, saved at exps/args.exp/args.output.
 
@@ -144,7 +144,7 @@ For any questions or contributions, feel free to reach out.
 Maintainer: Name / GitHub Handle
 
 ## 📝 Citation
-If you use this project in your research, please cite:
+If you use any files of this repository, please cite:
 
-Reference:
-xxxxxx
+Yang, X., Naylor, P. A., Doclo, S., Bitzer, J., 
+"NEURAL DRONE LOCALIZATION EXPLOITING SIGNAL SYNTHESIS OF REAL-WORLD AUDIO DATA", Eusipco 2025, Italy

@@ -14,11 +14,11 @@ This part is a drone signal generator capable of producing signals emitted durin
 
 ## Usage 1: Batch Generate Random Drone Flight Data
 Run the script drone_generator.py to simulate various drone's flight audio (Default generates 5 samples):
-```
+```bash
 python drone_generator_main.py 
 ```
 Generate 20 samples:
-```
+```bash
 python drone_generator_main.py --num 10 --exp exp3 
 ```
 
@@ -38,7 +38,7 @@ Furthermore, in addition to batch data generation, there is also an example feat
 
 
 Run the script drone_generator.py to simulate an example for reference:
-```
+```bash
 python drone_generator_main.py --exp exp3 --example
 ```
 There are some parameters about synthesis of drone signal and flight which can be customized in **Data/exp../drone_example_config.yaml**, including drone_type, starting_point, flight_state, forward_dir, wind_speed and so on.
@@ -53,7 +53,13 @@ The simulation will generate drone positions and visualizations. Related figures
 
 
 ## Reference
-[1] Heutschi, K. & Ott, Beat & Nussbaumer, Thomas & Wellig, Peter. (2020). Synthesis of real world drone signals based on lab recordings. Acta Acustica. 4. 10.1051/aacus/2020023. 
+[1] Heutschi, K. & Ott, Beat & Nussbaumer, Thomas & Wellig, Peter. (2020). Synthesis of real world drone signals based on lab recordings. Acta Acustica. 4. 10.1051/aacus/2020023.
+
+## 📝 Citation
+If you use any files of this repository, please cite:
+
+Yang, X., Naylor, P. A., Doclo, S., Bitzer, J., 
+"NEURAL DRONE LOCALIZATION EXPLOITING SIGNAL SYNTHESIS OF REAL-WORLD AUDIO DATA", Eusipco 2025, Italy 
 
 
 
