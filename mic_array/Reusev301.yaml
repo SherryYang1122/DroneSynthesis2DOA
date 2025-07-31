@@ -1,0 +1,16 @@
+arrays:
+  - microphone_type: individual # figure in the slide
+    microphone_positions: [
+      [0.05625, 0.0375, 0.15],
+      [0, 0.09, 0.15],
+      [0.01875, 0.15, 0.1145],
+      [0.05625, 0.15, 0.009],
+      [0.15, 0.15, 0.075],
+      [0.13125, 0.075, 0.009],
+      [0.15, 0.01875, 0.15],
+      [0, 0, 0]
+    ]
+    
+    microphone_center:   [0,0,3]
+    rotation_angles_xyz: [0,0,157.5]  # rotate 
+    mic_white_noise(dB): -60

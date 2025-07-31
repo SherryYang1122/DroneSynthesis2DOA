@@ -1,0 +1,15 @@
+arrays:
+  - microphone_type: individual
+    microphone_positions: [
+        [0, 0, 0],
+        [0, 0.09, 0.15],
+        [0.15, 0.01875, 0.1145],
+        [0.13125, 0.075, 0.009],
+        [0.01875, 0.15, 0.15],
+        [0.05625, 0.15, 0.009],
+        [0.05625, 0.0375, 0.15],
+        [0.15, 0.15, 0.075]
+    ]
+    microphone_center: [0, 0, 3]
+    rotation_angles_xyz: 
+    mic_white_noise(dB): -60
