@@ -40,10 +40,10 @@ def main():
                 drone_type = random.choice(drone_types) 
                 drone_white_noise = random.uniform(drone_white_nois_min, drone_white_noise_max)
                 signaltype = random.choice(signaltypes)
-                pulse_len = random.choice([i for i in range(pulse_len_min, pulse_len_max+1)])
+                pulse_len = random.choice([i for i in range(pulse_len_min, pulse_len_max + 1)])
                 change_time = random.uniform(change_time_min, change_time_max)
                 s_shape_coef = random.uniform(s_shape_coef_min, s_shape_coef_max)
-                drone_loudness = np.sqrt(loudness**2/pulse_len)
+                drone_loudness = np.sqrt(loudness ** 2 / pulse_len)
                 # Generate random values from the normal distribution for drone initial position
                 x_start, y_start, z_start = np.random.normal(x_init, x_init_std), np.random.normal(y_init, y_init_std), np.random.normal(z_init, z_init_std)
                 
@@ -82,14 +82,14 @@ def main():
                     x_pos = state[0]
                     y_pos = state[1]
                     z_pos = state[2]
-                    if x_pos<x_min or x_pos>x_max or y_pos<(y_min-smoothing) or y_pos>(y_max+smoothing) or z_pos<(z_min-smoothing) or z_pos>(z_max+smoothing):
+                    if x_pos < x_min or x_pos > x_max or y_pos < (y_min - smoothing) or y_pos > (y_max + smoothing) or z_pos < (z_min - smoothing) or z_pos > (z_max + smoothing):
                         flag = True
                         break
                 if flag:
                     continue 
 
                 # Compute RMS (Root Mean Square) energy
-                rms = np.sqrt(np.mean(drone_signal** 2))
+                rms = np.sqrt(np.mean(drone_signal ** 2))
                 # Set a threshold (adjust as needed)
                 threshold_min = drone_loudness * 0.01  # Modify based on actual conditions
                 threshold_max = drone_loudness * 100
@@ -138,7 +138,7 @@ def get_example():
         num_rotor = 4
     plot_drone_scenario(np.array(flight_path), output_folder)
     plot_drone_frequency(rpm_freqs, num_rotor, duration, sampling_rate, output_folder)
-    #frequency domain and save as wav form
+    # frequency domain and save as wav form
     plot_signal_spectrogram(drone_signal, sampling_rate, output_folder)
    
     # save data
@@ -197,10 +197,10 @@ if __name__ == '__main__':
     abspath = os.path.dirname(os.path.abspath(__file__))
     # Get the parent directory path
     parent_dir = os.path.dirname(abspath)
-    result_dir = os.path.join(parent_dir, "exps/"+args.exp)
+    result_dir = os.path.join(parent_dir, "exps", args.exp)
     os.makedirs(result_dir, exist_ok=True)
 
-    if args.example == False:
+    if args.example is False:
         # Load hyperparameters from yaml
         hyperpara_path = os.path.join(result_dir, 'exp_config.yaml')
         if os.path.exists(hyperpara_path):
@@ -269,7 +269,7 @@ if __name__ == '__main__':
         os.makedirs(output_folder, exist_ok=True)
         # customization of the drone type, positions and weather in example_config.yaml
         # Load parameters from example config
-        with open(result_dir+'/drone_example_config.yaml', 'r') as yamlfile:
+        with open(os.path.join(result_dir, 'drone_example_config.yaml'), 'r') as yamlfile:
             example_params = yaml.safe_load(yamlfile)
         # Access example parameters
         drone_type = example_params['drone_type']

@@ -14,7 +14,7 @@ def main():
     abspath = os.path.dirname(os.path.abspath(__file__))
     # Get the parent directory path
     parent_dir = os.path.dirname(abspath)
-    result_dir = os.path.join(parent_dir, "exps/"+args.exp)
+    result_dir = os.path.join(parent_dir, "exps", args.exp)
     os.makedirs(result_dir, exist_ok=True)
 
     # read YAML file
@@ -78,7 +78,7 @@ def plot_arrays(arrays_data, yaml_file, mic_dir):
     ax.set_zlabel('Z')
     ax.set_title('Microphone Arrays')
     ax.legend()
-    plt.savefig(mic_dir+'/'+yaml_file.split('.')[0]+'.png')
+    plt.savefig(os.path.join(mic_dir, yaml_file.split('.')[0] + '.png'))
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process microphone array parameters from YAML file.')

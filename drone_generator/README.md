@@ -10,6 +10,7 @@ This part is a drone signal generator capable of producing signals emitted durin
 - Matplotlib
 - soundfile
 - tqdm (progressbar)
+- pyyaml (for reading configuration files)
 
 
 ## Usage 1: Batch Generate Random Drone Flight Data

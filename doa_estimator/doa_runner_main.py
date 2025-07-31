@@ -31,7 +31,7 @@ def main():
     if args.mask:
         algorithm = algorithm + "_mask"
 
-    output_folder = os.path.join(result_dir, "DOA_"+algorithm)
+    output_folder = os.path.join(result_dir, "DOA_" + algorithm)
     if os.path.exists(output_folder):
         shutil.rmtree(output_folder)
     os.makedirs(output_folder, exist_ok=True)
@@ -93,7 +93,7 @@ if __name__ == '__main__':
     abspath = os.path.dirname(os.path.abspath(__file__))
     # Get the parent directory path
     parent_dir = os.path.dirname(abspath)
-    result_dir = os.path.join(parent_dir, "exps/"+args.exp)
+    result_dir = os.path.join(parent_dir, "exps", args.exp)
     os.makedirs(result_dir, exist_ok=True)
 
     hyperpara_path = os.path.join(result_dir, 'exp_config.yaml')

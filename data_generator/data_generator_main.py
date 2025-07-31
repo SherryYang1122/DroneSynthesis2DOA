@@ -279,17 +279,17 @@ if __name__ == '__main__':
     abspath = os.path.dirname(os.path.abspath(__file__))
     # Get the parent directory path
     parent_dir = os.path.dirname(abspath)
-    result_dir = os.path.join(parent_dir, "exps/"+args.exp)
+    result_dir = os.path.join(parent_dir, "exps", args.exp)
     os.makedirs(result_dir, exist_ok=True)
 
-    if args.example == False:
+    if args.example is False:
         # Load hyperparameters from yaml
         hyperpara_path = os.path.join(result_dir, 'exp_config.yaml')
         if os.path.exists(hyperpara_path):
             with open(hyperpara_path, 'r') as yamlfile:
                 hyperparams = yaml.safe_load(yamlfile)
         else:
-            default_hyperpara_path = abspath +'/exp_config.yaml'
+            default_hyperpara_path = os.path.join(abspath, 'exp_config.yaml')
             shutil.copyfile(default_hyperpara_path, hyperpara_path)
             with open(hyperpara_path, 'r') as yamlfile:
                 hyperparams = yaml.safe_load(yamlfile)            

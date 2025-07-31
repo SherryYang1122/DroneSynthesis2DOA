@@ -130,12 +130,12 @@ class DOADatasetMulti(Dataset):
 
     def _get_audio_sample_path(self, index):
         filename = self.items[index]
-        return os.path.join(self.data_folder, filename+"/"+filename+".wav")
+        return os.path.join(self.data_folder, filename, filename + ".wav")
 
 
     def _get_flight_path(self, index):
         filename = self.items[index]
-        doa_real_sample = os.path.join(self.data_folder, filename+"/"+"DOATruePos.csv")
+        doa_real_sample = os.path.join(self.data_folder, filename, "DOATruePos.csv")
         with open(doa_real_sample, 'r', newline='') as file:
             doa_real = csv.reader(file)
             doa_real = list(doa_real)[1:]

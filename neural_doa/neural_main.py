@@ -597,7 +597,7 @@ if __name__ == '__main__':
     abspath = os.path.dirname(os.path.abspath(__file__))
     # Get the parent directory path
     parent_dir = os.path.dirname(abspath)
-    result_dir = os.path.join(parent_dir, "exps/"+args.exp)
+    result_dir = os.path.join(parent_dir, "exps", args.exp)
     os.makedirs(result_dir, exist_ok=True)
 
     # Load hyperparameters from yaml

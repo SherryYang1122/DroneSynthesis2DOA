@@ -1,4 +1,5 @@
 import numpy as np
+import os
 from geometry import fibonacci_sphere, half_fibonacci_sphere
 from geometry import sph2cart, cart2sph
 import torch
@@ -148,7 +149,7 @@ def plot_srp_points(accumulator, sphere_points, ind):
     plt.title('Intensity Heatmap')
     plt.grid(True)
  
-    plt.savefig(f"example/srp_points_{ind}.png")
+    plt.savefig(os.path.join("example", f"srp_points_{ind}.png"))
     plt.close()
     plt.scatter(range(len(accumulator)), accumulator, s=5)
     top3_indices = sorted(range(len(accumulator)), key=lambda i: accumulator[i], reverse=True)[:3]
@@ -160,7 +161,7 @@ def plot_srp_points(accumulator, sphere_points, ind):
     plt.xlabel('Index')
     plt.ylabel('Value')
     plt.title(title)
-    plt.savefig(f"example/srp_value_{ind}.png")
+    plt.savefig(os.path.join("example", f"srp_value_{ind}.png"))
     plt.close()
 
     

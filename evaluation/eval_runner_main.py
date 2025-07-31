@@ -17,9 +17,9 @@ def main():
     abspath = os.path.dirname(os.path.abspath(__file__))
     # Get the parent directory path
     parent_dir = os.path.dirname(abspath)
-    result_dir = os.path.join(parent_dir, "exps/"+args.exp)
+    result_dir = os.path.join(parent_dir, "exps", args.exp)
     os.makedirs(result_dir, exist_ok=True)
-    alg_dir = os.path.join(parent_dir, "exps/"+args.exp+"/"+args.eval_alg)
+    alg_dir = os.path.join(parent_dir, "exps", args.exp, args.eval_alg)
     os.makedirs(alg_dir, exist_ok=True)
 
     eval_alg = args.eval_alg
@@ -37,7 +37,7 @@ def main():
         example_path = os.path.join(result_dir, "eval_example")
         example_path = os.path.join(example_path, args.sample_name)
         os.makedirs(example_path, exist_ok=True)
-        with open(os.path.join(doa_est_path, args.sample_name+".csv"), 'r', newline='') as file:
+        with open(os.path.join(doa_est_path, args.sample_name + ".csv"), 'r', newline='') as file:
             doa_est = csv.reader(file)
             doa_est = list(doa_est)[1:]
             doa_est = [list(map(float, row)) for row in doa_est] 
@@ -256,7 +256,7 @@ if __name__ == '__main__':
     abspath = os.path.dirname(os.path.abspath(__file__))
     # Get the parent directory path
     parent_dir = os.path.dirname(abspath)
-    result_dir = os.path.join(parent_dir, "exps/"+args.exp)
+    result_dir = os.path.join(parent_dir, "exps", args.exp)
     os.makedirs(result_dir, exist_ok=True)
 
     hyperpara_path = os.path.join(result_dir, 'exp_config.yaml')

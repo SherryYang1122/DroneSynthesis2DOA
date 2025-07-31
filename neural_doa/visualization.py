@@ -261,7 +261,7 @@ def plot_doa_error_vs_distance(distances, doa_errors, snr_values, savepath):
     plt.ylabel('DOA Error (degree)')
     plt.title('DOA Error vs. Distance with Different SNR Levels')
     # Show plot
-    plt.savefig(savepath+'/doa_error_vs_distance.png')
+    plt.savefig(os.path.join(savepath, 'doa_error_vs_distance.png'))
 
 def plot_doa_error_vs_distance_real_snr(distances, doa_errors, snr_values, savepath):
     """
@@ -294,7 +294,7 @@ def plot_doa_error_vs_distance_real_snr(distances, doa_errors, snr_values, savep
     plt.ylabel('DOA Error (degree)')
     plt.title('DOA Error vs. Distance with Different SNR Levels')
     # Show plot
-    plt.savefig(savepath+'/doa_error_vs_distance_real_snr.png')
+    plt.savefig(os.path.join(savepath, 'doa_error_vs_distance_real_snr.png'))
 
 def plot_localization_result(result, result_name, num_classes, max_error, column_num, max_subfig, output_folder):
     num = len(result)

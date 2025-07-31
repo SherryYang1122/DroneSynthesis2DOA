@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 from scipy.signal import spectrogram
 import soundfile as sf
 
@@ -19,7 +20,7 @@ def plot_microphone_array(mic_pos_matrix):
     ax.legend()
 
     # Save the plot as an image file
-    plt.savefig('example/microphone_array.png')
+    plt.savefig(os.path.join('example', 'microphone_array.png'))
 
 
 # plot drone flight and micphone array in 3D space
@@ -206,7 +207,7 @@ def plot_sph_angles_time_axis(azimuth_angles, elevation_angles, azimuth_angles_e
     ax2.set_title('Azimuth Angle Comparison')
     ax2.legend()
     # Displaying the plot
-    plt.savefig(savepath+'/est_sph_angles_time_axis.png')
+    plt.savefig(os.path.join(savepath, 'est_sph_angles_time_axis.png'))
 
 
 def plot_sph_angles(azimuth_angles, elevation_angles, azimuth_angles_est, elevation_angles_est, savepath):
@@ -226,7 +227,7 @@ def plot_sph_angles(azimuth_angles, elevation_angles, azimuth_angles_est, elevat
     ax2.grid(True)
 
     plt.tight_layout()
-    plt.savefig(savepath+'/real_and_est_sph_angles.png')
+    plt.savefig(os.path.join(savepath, 'real_and_est_sph_angles.png'))
 
 # fibonacci sphere visualization
 def plot_sphere_points(points):
@@ -258,7 +259,7 @@ def plot_doa_error_over_time(DOA_error, frame_hop, savepath):
     plt.legend()
 
     plt.grid(True)
-    plt.savefig(savepath+'/doa_error_over_time.png')
+    plt.savefig(os.path.join(savepath, 'doa_error_over_time.png'))
 
 def plot_doa_error_vs_distance(distances, doa_errors, snr_values, savepath):
     """
@@ -300,7 +301,7 @@ def plot_doa_error_vs_distance(distances, doa_errors, snr_values, savepath):
     plt.ylabel('DOA Error (degree)')
     plt.title('DOA Error vs. Distance with Different SNR Levels')
     # Show plot
-    plt.savefig(savepath+'/doa_error_vs_distance.png')
+    plt.savefig(os.path.join(savepath, 'doa_error_vs_distance.png'))
 
 
 def plot_doa_error_vs_distance_real_snr(distances, doa_errors, snr_values, savepath):
@@ -334,7 +335,7 @@ def plot_doa_error_vs_distance_real_snr(distances, doa_errors, snr_values, savep
     plt.ylabel('DOA Error (degree)')
     plt.title('DOA Error vs. Distance with Different SNR Levels')
     # Show plot
-    plt.savefig(savepath+'/doa_error_vs_distance_real_snr.png')
+    plt.savefig(os.path.join(savepath, 'doa_error_vs_distance_real_snr.png'))
 
 def plot_signal_spectrogram(signal, sampling_rate, example_path):
     # Compute the signal's spectrogram
@@ -425,4 +426,4 @@ def plot_drone_path_with_array_center_2d(drone_positions, mic_positions, example
     ax.set_title("2D Drone Flight Path with Array Center")
     
     # Save the plot as an image file
-    plt.savefig(example_path+"/RealDroneFlight2D.png")
+    plt.savefig(os.path.join(example_path, "RealDroneFlight2D.png"))

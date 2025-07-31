@@ -5,7 +5,7 @@ from scipy.signal import stft, istft
 import random
 
 
-# this part is to generate the emited signal from drone body, according to the type of drone, the flying states, weather and so on
+# this part is to generate the emitted signal from drone body, according to the type of drone, the flying states, weather and so on
 
 # drone has 4 states:  1 hover, 2 climb, 3 sink, 4 forward
 # RPM(Revolutions Per Minute) is the most important parameter for the signal we will create
@@ -55,7 +55,7 @@ DRONES_INFO = {
 # random_dev is related with the wind_condition and drone state
 # Model parameters a and b [s/m] to estimate the normalised standard deviation of the rotational speed variation in dependency of the wind speed
 # std = a + b * abs(wind_speed)
-# hover_10 means the flight altitude of drons is 10 m
+# hover_10 means the flight altitude of drones is 10 m
 STD_WIND_INFO = {
     'hover_10': [0.005, 0.0052],
     'hover_20': [0.005, 0.0079],
@@ -83,7 +83,7 @@ EQ_SLOPE = {
 # the interface between flight_state and the basic RPM of the drone
 # flight_state = [[State, Time]...], eg[["hover", 1], ["forward", 3]...]
 # to derive [RPM Time] from the drone's flight state
-# The result coud be the matrix with RPM and time 
+# The result could be the matrix with RPM and time 
 # eg, rpm_matrix = [[400,1.0],[200,2.0],[150,3.0],[200,4.0]]
 def flightstate2RPM(flight_state, state_speed, climb_speed_max, sink_speed_max, drone_type="M2"):
     rpm_matrix = []
