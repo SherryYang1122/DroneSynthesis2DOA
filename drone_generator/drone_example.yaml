@@ -1,0 +1,33 @@
+# parameters of drone flight path
+drone_type: 'M2' # Choose the drone type from 'M2', 'I2', 'F-4', 'S-9'
+starting_point: [0, -10, 2] # The starting position of the drone [X, Y, Z]
+# Flight states in the format "state, time", there are 4 kinds of states together: climb, sink, hover, forward
+flight_state: [["climb", 2], ["hover", 4]]  # eg [["climb", 2], ["hover", 4], ["forward", 8], ["sink", 9]]
+forward_dir: [[1, 1, 0]] # Please point out the directions of drone flying if the forward states exist
+
+climb_speed_max: 4  # the max climb speed of the drone
+sink_speed_max: 3  # the max sink speed of the drone
+speed_min: 2 # the minimum forward/climb/sink speed of the drone
+
+# weather parameters
+wind_speed: 6.5 # the wind speed (m/s)
+down_wind: false # down_wind mode, true or false
+
+# paramters about the pulse signal type
+loudness: 3.0 # Loudness of the drone noise
+signaltype: 'alternate' #Choose the signal type of drone, 'rect' or 'alternate'
+# The pulse length of the pulse signal
+pulse_len: 2
+# the transition time when the drone changes its state (s)
+change_time: 0.2  
+# the transition shape coefficient
+s_shape_coef: 5 
+# White noise level in the drone signal 
+drone_white_noise: 0.01
+
+modulation_range: 10  # micro modulation to adjust frequency of rotor during drone flight
+seg_dura_min: 0.02  # min segment duration of each micro modulation
+seg_dura_max: 0.05  # max segment duration of each micro modulation
+
+# other hyper paramters
+sampling_rate: 48000  # microphone sampling rate
