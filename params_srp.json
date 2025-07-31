@@ -1,0 +1,41 @@
+{
+    "neural_srp": {
+        "dropout_rate": 0,
+        "f_pool_size": [2, 2, 2],
+        "t_pool_size": [5, 1, 1],
+        "nb_rnn_layers": 2,
+        "bidirectional_rnn": false,
+        "conv_agg_mode": "flatten",
+        "pair_agg_mode": "sum",
+        "nb_cnn2d_filt": 128,
+        "rnn_size": 128,
+        "fnn_pairwise_size": 128,
+        "fnn_doa_size": 128,
+        "fnn_act_size": 128,
+        "nb_fnn_act_layers": 3,
+        "nb_pairwise_fnn_layers": 2,
+        "nb_fnn_layers": 2,
+        "metadata_type": "mic_positions",
+        "use_activity_output": false, 
+        "metadata_fusion_mode": "late_concat",
+        "use_batch_norm_input": false,
+        "use_batch_norm_hidden": false,
+        "input_feature": "gcc"
+    },
+
+    "srp":{
+        "res_the": 32,
+        "res_phi": 64,
+        "gcc_mode": "neural"
+    },
+    "loss":{
+        "doa_loss_weight": 1,
+        "activity_loss_weight": 0,
+        "vad_weighted_loss": false,
+        "dMOTP_wt": 50,
+        "IDS_wt": 1,
+        "dMOTA_wt": 1,
+        "temporal_regularity_weight": 0,
+        "norm_type": "l1"
+    }
+}
