@@ -1,3 +1,8 @@
+# drone_generator_main.py
+# This code represents a drone signal generator that can generate arbitrary numbers of drone flight paths and emitted signals.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025,
+
 import numpy as np
 import argparse
 import warnings
@@ -13,8 +18,6 @@ import datetime
 from visualization import plot_drone_scenario, plot_signal_spectrogram, plot_drone_frequency
 from drone_signal_generation import getFlightPath, flightstate2RPM, getFullDroneSignal, get_micro_modulation
 from geometry import sph2cart
-
-# This code represents a drone signal generator that can generate arbitrary numbers of drone flight paths and emitted signals.
 
 
 # Main program to simulate signal the drone emits when it flies

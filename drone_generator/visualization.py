@@ -1,5 +1,11 @@
+# visualization.py
+# This code provides visualization functions for drone flight paths, signals, and acoustic analysis plots.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 from scipy.signal import spectrogram
 import soundfile as sf
 
@@ -19,7 +25,7 @@ def plot_microphone_array(mic_pos_matrix):
     ax.legend()
 
     # Save the plot as an image file
-    plt.savefig('example/microphone_array.png')
+    plt.savefig(os.path.join('example', 'microphone_array.png'))
 
 
 # plot drone flight and micphone array in 3D space
@@ -93,7 +99,7 @@ def plot_drone_mic_scenario(mic_pos_matrix, wall_coeff, flight_path):
     # Set plot legend
     ax.legend()
     # Show and save the plot
-    plt.savefig('example/drone_mic_scenario.png')
+    plt.savefig(os.path.join('example', 'drone_mic_scenario.png'))
 
 
 # plot only drone flight in 3D space
@@ -130,7 +136,7 @@ def plot_drone_scenario(flightpath, output_folder):
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
     ax.set_title('Drone Path')
-    plt.savefig(output_folder+'/drone_scenario.png')
+    plt.savefig(os.path.join(output_folder, 'drone_scenario.png'))
   
 
 def plot_drone_frequency(rpm_freqs, num_rotor, duration, sampling_rate, output_folder):
@@ -142,7 +148,7 @@ def plot_drone_frequency(rpm_freqs, num_rotor, duration, sampling_rate, output_f
     plt.ylabel('Value')
     rotors = ['Rotor '+str(i+1) for i in range(num_rotor)]
     plt.legend(rotors)
-    plt.savefig(output_folder+'/drone_rpm.png')
+    plt.savefig(os.path.join(output_folder, 'drone_rpm.png'))
 
 
 def plot_mic_array_siganls(t, signal):
@@ -158,7 +164,7 @@ def plot_mic_array_siganls(t, signal):
         ax.set_ylabel("Amplitude")
     # Adjust layout
     plt.tight_layout()
-    plt.savefig('example/signal_from_microphones.png')
+    plt.savefig(os.path.join('example', 'signal_from_microphones.png'))
 
 
 def plot_signal_spectrogram(signal, sampling_rate, output_folder):
@@ -179,8 +185,8 @@ def plot_signal_spectrogram(signal, sampling_rate, output_folder):
     plt.colorbar(label='Intensity (dB)')
     max_frequency = 3000
     plt.ylim(0, max_frequency)# Adjust the frequency range based on your signal
-    plt.savefig(output_folder+'/spectrogram_drone.png')
-    sf.write(output_folder+'/drone_audio.wav', signal, sampling_rate)
+    plt.savefig(os.path.join(output_folder, 'spectrogram_drone.png'))
+    sf.write(os.path.join(output_folder, 'drone_audio.wav'), signal, sampling_rate)
 
     time = np.arange(len(signal)) / sampling_rate
     # Plot the waveform
@@ -190,7 +196,7 @@ def plot_signal_spectrogram(signal, sampling_rate, output_folder):
     plt.xlabel("Time (seconds)")
     plt.ylabel("Amplitude")
     plt.title("Audio Signal Waveform")
-    plt.savefig(output_folder+'/audio_waveform_drone.png')
+    plt.savefig(os.path.join(output_folder, 'audio_waveform_drone.png'))
 
 # plot spherical coordinates
 def plot_sph_angles_time_axis(azimuth_angles, elevation_angles, azimuth_angles_est, elevation_angles_est, window_size, overlap, sampling_rate):
@@ -217,7 +223,7 @@ def plot_sph_angles_time_axis(azimuth_angles, elevation_angles, azimuth_angles_e
     ax2.set_title('Azimuth Angle Comparison')
     ax2.legend()
     # Displaying the plot
-    plt.savefig('example/est_sph_angles_time_axis.png')
+    plt.savefig(os.path.join('example', 'est_sph_angles_time_axis.png'))
 
 
 def plot_sph_angles(azimuth_angles, elevation_angles, azimuth_angles_est, elevation_angles_est):
@@ -237,7 +243,7 @@ def plot_sph_angles(azimuth_angles, elevation_angles, azimuth_angles_est, elevat
     ax2.grid(True)
 
     plt.tight_layout()
-    plt.savefig('example/real_and_est_sph_angles.png')
+    plt.savefig(os.path.join('example', 'real_and_est_sph_angles.png'))
 
 # fibonacci sphere visualization
 def plot_sphere_points(points):
@@ -254,4 +260,4 @@ def plot_sphere_points(points):
     ax.set_zlabel('Z')
 
     # Show the plot
-    plt.savefig('example/fibonacci_sphere.png')
+    plt.savefig(os.path.join('example', 'fibonacci_sphere.png'))

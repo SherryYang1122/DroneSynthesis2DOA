@@ -1,3 +1,8 @@
+# geometry.py
+# This code provides geometric utility functions for coordinate transformations and spatial calculations in drone simulation.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import numpy as np
 
 # Calculate the symmetrical point of a given point about a plane

@@ -94,7 +94,7 @@ def plot_drone_mic_scenario(mic_pos_matrix, wall_coeff, flight_path):
     # Set plot legend
     ax.legend()
     # Show and save the plot
-    plt.savefig('example/drone_mic_scenario.png')
+    plt.savefig(os.path.join('example', 'drone_mic_scenario.png'))
 
 
 # plot only drone flight in 3D space
@@ -131,7 +131,7 @@ def plot_drone_scenario(flightpath):
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
     ax.set_title('Drone Path')
-    plt.savefig('example/drone_scenario.png')
+    plt.savefig(os.path.join('example', 'drone_scenario.png'))
   
 
 def plot_drone_frequency(rpm_freqs, num_rotor, duration, sampling_rate):
@@ -143,7 +143,7 @@ def plot_drone_frequency(rpm_freqs, num_rotor, duration, sampling_rate):
     plt.ylabel('Value')
     rotors = ['Rotor '+str(i+1) for i in range(num_rotor)]
     plt.legend(rotors)
-    plt.savefig('example/drone_rpm.png')
+    plt.savefig(os.path.join('example', 'drone_rpm.png'))
 
 
 def plot_mic_array_siganls(t, signal):
@@ -159,7 +159,7 @@ def plot_mic_array_siganls(t, signal):
         ax.set_ylabel("Amplitude")
     # Adjust layout
     plt.tight_layout()
-    plt.savefig('example/signal_from_microphones.png')
+    plt.savefig(os.path.join('example', 'signal_from_microphones.png'))
 
 
 def plot_signal_spectrogram(signal, sampling_rate):
@@ -178,9 +178,9 @@ def plot_signal_spectrogram(signal, sampling_rate):
     plt.colorbar(label='Intensity (dB)')
     max_frequency = 5000
     plt.ylim(0, max_frequency)# Adjust the frequency range based on your signal
-    plt.savefig('example/spectrogram_drone.png')
+    plt.savefig(os.path.join('example', 'spectrogram_drone.png'))
 
-    sf.write('example/drone_audio.wav', signal, sampling_rate)
+    sf.write(os.path.join('example', 'drone_audio.wav'), signal, sampling_rate)
 
 # plot spherical coordinates
 def plot_sph_angles_time_axis(azimuth_angles, elevation_angles, azimuth_angles_est, elevation_angles_est, frame_hop, savepath):
@@ -244,7 +244,7 @@ def plot_sphere_points(points):
     ax.set_zlabel('Z')
 
     # Show the plot
-    plt.savefig('example/fibonacci_sphere.png')
+    plt.savefig(os.path.join('example', 'fibonacci_sphere.png'))
 
 
 def plot_doa_error_over_time(DOA_error, frame_hop, savepath):
@@ -355,7 +355,7 @@ def plot_signal_spectrogram(signal, sampling_rate, example_path):
     plt.colorbar(label='Intensity (dB)')
     max_frequency = 7000 #3000
     plt.ylim(0, max_frequency)# Adjust the frequency range based on your signal
-    plt.savefig(f'{example_path}/spectrogram_drone.png')
+    plt.savefig(os.path.join(example_path, 'spectrogram_drone.png'))
 
 
 def plot_drone_path_with_array_center_2d(drone_positions, mic_positions, example_path, frame_hop, interesting_points=None, interesting_period=None):

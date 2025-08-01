@@ -1,11 +1,14 @@
+# drone_signal_generation.py
+# This code generates emitted signals from drone body according to drone type, flying states, weather conditions and other parameters.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import numpy as np
 import scipy.signal as signal
 from scipy.interpolate import interp1d
 from scipy.signal import stft, istft
 import random
 
-
-# this part is to generate the emitted signal from drone body, according to the type of drone, the flying states, weather and so on
 
 # drone has 4 states:  1 hover, 2 climb, 3 sink, 4 forward
 # RPM(Revolutions Per Minute) is the most important parameter for the signal we will create
