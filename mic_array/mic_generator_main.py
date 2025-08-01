@@ -1,3 +1,9 @@
+# mic_generator_main.py
+# This code generates multiple microphone arrays and their coordinates based 
+# on configuration parameters.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import yaml
 import json
 import numpy as np
@@ -28,13 +34,13 @@ def main():
         microphone_type = array["microphone_type"]
         microphone_center = array["microphone_center"]
         rotXYZ = array["rotation_angles_xyz"]
-        mic_white_noise = 10**(array["mic_white_noise(dB)"]/10.0)
+        mic_white_noise = 10 ** (array["mic_white_noise(dB)"] / 10.0)
 
         # Process each array's parameters
         # rotating the given 3D object's vertex coordinates around the corresponding axis
         # RotX, RotY, and RotZ perform rotation operations around the X, Y, and Z axes (in degrees), respectively
         # If the value is positive, the rotation direction follows the right-hand rule; if negative, it's the opposite.
-        if rotXYZ == None:
+        if rotXYZ is None:
             rotX = 0
             rotY = 0
             rotZ = 0
@@ -47,19 +53,19 @@ def main():
             array_size = array["array_size"]
             mic_pos_matrix = get_mic_array_tetra(array_size, microphone_center, rotX, rotY, rotZ)
         elif microphone_type == 'octahedron':
-            mic_pos_matrix = get_mic_array_octahedron(microphone_center, rotX, rotY, rotZ)   
+            mic_pos_matrix = get_mic_array_octahedron(microphone_center, rotX, rotY, rotZ)
         elif microphone_type == 'individual':
             mic_pos = array["microphone_positions"]
             mic_pos_matrix = get_mic_array_ind(mic_pos, microphone_center, rotX, rotY, rotZ)
         array_data = {
-            "name": 'MicArray'+str(i),
+            "name": 'MicArray' + str(i),
             "type": microphone_type,
             "mic_center": microphone_center,
             "mic_pos": mic_pos_matrix.tolist(),
             "mic_white_noise": mic_white_noise
         }
         arrays_data.append(array_data)
-    # save the data 
+    # save the data
     mic_dir = result_dir
     os.makedirs(mic_dir, exist_ok=True)
 
@@ -72,7 +78,7 @@ def plot_arrays(arrays_data, yaml_file, mic_dir):
     ax = fig.add_subplot(111, projection='3d')
     for array in arrays_data:
         center = array["mic_center"]
-        ax.scatter(center[0], center[1], center[2], label=array["name"]+"_"+array["type"])
+        ax.scatter(center[0], center[1], center[2], label=array["name"] + "_" + array["type"])
     ax.set_xlabel('X')
     ax.set_ylabel('Y')
     ax.set_zlabel('Z')
@@ -82,7 +88,8 @@ def plot_arrays(arrays_data, yaml_file, mic_dir):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Process microphone array parameters from YAML file.')
-    parser.add_argument('--yaml_file', type=str, default='mic_config.yaml', help='YAML file containing microphone array parameters')
-    parser.add_argument('--exp', type=str, default='exp_test', help='Enter experiment ID')  
+    parser.add_argument('--yaml_file', type=str, default='mic_config.yaml',
+                        help='YAML file containing microphone array parameters')
+    parser.add_argument('--exp', type=str, default='exp_test', help='Enter experiment ID')
     args = parser.parse_args()
     main()
