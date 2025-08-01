@@ -1,3 +1,8 @@
+# visualization.py
+# This code provides visualization functions for DOA estimation results and acoustic analysis.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.signal import spectrogram

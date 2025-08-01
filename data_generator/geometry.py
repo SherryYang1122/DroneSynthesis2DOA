@@ -39,6 +39,15 @@ def cart2sph(vector):
     azimuth_angle = (azimuth_angle + 360) if azimuth_angle < 0 else azimuth_angle
     return [elevation_angle, azimuth_angle]
 
+# Convert azimuth and elevation angles to Cartesian coordinates
+def sph2cart(elevation_angle, azimuth_angle):
+    elevation = np.radians(elevation_angle)
+    azimuth = np.radians(azimuth_angle)
+    x = np.sin(elevation) * np.cos(azimuth)
+    y = np.sin(elevation) * np.sin(azimuth)
+    z = np.cos(elevation)
+    return [x, y, z]
+
 # Create a grid of possible source directions
 # Generate evenly distributed points on the spherical surface
 # n is the amount of directions

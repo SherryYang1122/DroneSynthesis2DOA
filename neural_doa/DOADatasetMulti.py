@@ -1,3 +1,8 @@
+# DOADatasetMulti.py
+# This code provides a PyTorch dataset class for multi-channel DOA estimation with various preprocessing methods and input features.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 from torch.utils.data import Dataset
 import torchaudio
 import numpy as np
@@ -10,7 +15,7 @@ import csv
 half_elevation = 90
 resampling_rate = 8000
 cutoff_frequency = 5000
-max_difference_samples = 36 
+max_difference_samples = 36
 
 class DOADatasetMulti(Dataset):
 

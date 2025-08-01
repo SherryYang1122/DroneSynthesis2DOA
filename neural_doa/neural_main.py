@@ -1,3 +1,8 @@
+# neural_main.py
+# This code provides the main training and testing pipeline for neural DOA estimation models.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import numpy as np
 import torch
 import argparse
