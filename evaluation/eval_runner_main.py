@@ -1,3 +1,8 @@
+# eval_runner_main.py
+# This code provides the main evaluation runner for DOA estimation performance analysis.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import numpy as np
 import argparse
 import warnings

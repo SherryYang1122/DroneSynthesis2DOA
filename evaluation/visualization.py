@@ -1,3 +1,8 @@
+# visualization.py
+# This code provides visualization functions for DOA evaluation, microphone arrays, and drone trajectories.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import matplotlib.pyplot as plt
 import numpy as np
 import os

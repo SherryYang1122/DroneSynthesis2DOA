@@ -1,3 +1,8 @@
+# doa_runner_main.py
+# This code provides the main runner for DOA estimation algorithms and evaluation.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import numpy as np
 import argparse
 import warnings
@@ -16,7 +21,7 @@ from doa_alg import get_doa_srp_phat
 from geometry import cart2sph
 
 # Hyperparameter settings
-fib_num = 500 # Number of points in fibonacci sphere for SRP (half sphere)
+fib_num = 500  # Number of points in fibonacci sphere for SRP (half sphere)
 
 
 # localization part
@@ -38,9 +43,9 @@ def main():
 
     # Open the JSON file and load its contents
     with open(os.path.join(result_dir, mic_jason), 'r') as file:
-        mic_data = json.load(file)    
-    mic_array = mic_data[0] 
-    mic_pos_matrix = np.array(mic_array["mic_pos"])   
+        mic_data = json.load(file)
+    mic_array = mic_data[0]
+    mic_pos_matrix = np.array(mic_array["mic_pos"])
 
     if torch.cuda.is_available():
         device = "cuda"
@@ -53,35 +58,38 @@ def main():
     wav_path = os.path.join(result_dir, wav_path)
     for folder_name in tqdm(os.listdir(wav_path)):
         # Get the full file path
-        file_name = folder_name+'.wav'
+        file_name = folder_name + '.wav'
         file_path = os.path.join(wav_path, folder_name)
         file_path = os.path.join(file_path, file_name)
         if os.path.exists(file_path):
             # Add the file name to the list
             # read the WAV file
-            signal, _ = librosa.load(file_path, sr = sampling_rate, mono=False)
-            doa_est_cart = get_doa_est(args.algorithm, signal, frame_length, frame_hop, mic_pos_matrix, sampling_rate, beta=args.beta, mask=args.mask, device=device)
-                            
-            # save doa estimated postion 
-            csv_file = folder_name+".csv"
+            signal, _ = librosa.load(file_path, sr=sampling_rate, mono=False)
+            doa_est_cart = get_doa_est(args.algorithm, signal, frame_length, frame_hop,
+                                       mic_pos_matrix, sampling_rate, beta=args.beta,
+                                       mask=args.mask, device=device)
+
+            # save doa estimated postion
+            csv_file = folder_name + ".csv"
             with open(os.path.join(output_folder, csv_file), 'w', newline='') as file:
                 writer = csv.writer(file)
-                writer.writerow(["time","X", "Y", "Z", "ele", "azi"])  
+                writer.writerow(["time", "X", "Y", "Z", "ele", "azi"])
                 for i, point in enumerate(doa_est_cart):
                     angles = cart2sph(point)
-                    writer.writerow([i*frame_hop+frame_length/2]+list(point)+angles)
+                    writer.writerow([i * frame_hop + frame_length / 2] + list(point) + angles)
 
 # Real-time localization function
 def get_doa_est(algorithm, signal, frame_length, frame_hop, mic_pos_matrix, sampling_rate, beta, mask, device):
     if algorithm == 'srp_phat':
-        doa_est_cart = get_doa_srp_phat(signal, frame_length, frame_hop, mic_pos_matrix, sampling_rate, fib_num, speed_of_sound, beta, mask, device)
-    return doa_est_cart          
+        doa_est_cart = get_doa_srp_phat(signal, frame_length, frame_hop, mic_pos_matrix,
+                                        sampling_rate, fib_num, speed_of_sound, beta, mask, device)
+    return doa_est_cart
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='TODA algorithms')
-    parser.add_argument('--dataset', type=str, default='MicArrayDataTest', help='Path to the wav data for localization')   
-    parser.add_argument('--exp', type=str, default='exp_test', help='Enter experiment ID')  
+    parser.add_argument('--dataset', type=str, default='MicArrayDataTest', help='Path to the wav data for localization')
+    parser.add_argument('--exp', type=str, default='exp_test', help='Enter experiment ID')
     # TODA algorithms
     parser.add_argument('--algorithm', choices=['srp_phat'], default='srp_phat', help='Localization algorithm choice')
     parser.add_argument('--beta', action='store_true', help='Only consider adding beta to srp phat')
@@ -98,9 +106,9 @@ if __name__ == '__main__':
 
     hyperpara_path = os.path.join(result_dir, 'exp_config.yaml')
     with open(hyperpara_path, 'r') as yamlfile:
-        hyperparams = yaml.safe_load(yamlfile)           
+        hyperparams = yaml.safe_load(yamlfile)
     # Access hyperparameters
-    speed_of_sound = hyperparams['speed_of_sound'] # Speed of sound in air (m/s)
+    speed_of_sound = hyperparams['speed_of_sound']  # Speed of sound in air (m/s)
     sampling_rate = hyperparams['sampling_rate']
     # real time localizaton: frame parameters
     frame_length = hyperparams['frame_length']
