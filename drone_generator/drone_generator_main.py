@@ -1,5 +1,6 @@
 # drone_generator_main.py
-# This code represents a drone signal generator that can generate arbitrary numbers of drone flight paths and emitted signals.
+# This code represents a drone signal generator that can generate arbitrary
+# numbers of drone flight paths and emitted signals.
 # (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
 # version 1.0, August 2025,
 
@@ -40,7 +41,7 @@ def main():
             iterations = 0
             while iterations < NUM_SAMPLE:
                 # Generate random parameters
-                drone_type = random.choice(drone_types) 
+                drone_type = random.choice(drone_types)
                 drone_white_noise = random.uniform(drone_white_nois_min, drone_white_noise_max)
                 signaltype = random.choice(signaltypes)
                 pulse_len = random.choice([i for i in range(pulse_len_min, pulse_len_max + 1)])
@@ -48,7 +49,11 @@ def main():
                 s_shape_coef = random.uniform(s_shape_coef_min, s_shape_coef_max)
                 drone_loudness = np.sqrt(loudness ** 2 / pulse_len)
                 # Generate random values from the normal distribution for drone initial position
-                x_start, y_start, z_start = np.random.normal(x_init, x_init_std), np.random.normal(y_init, y_init_std), np.random.normal(z_init, z_init_std)
+                x_start, y_start, z_start = (
+                    np.random.normal(x_init, x_init_std),
+                    np.random.normal(y_init, y_init_std),
+                    np.random.normal(z_init, z_init_std)
+                )
                 
                 starting_point = [x_start, y_start, z_start, 0.0]
                 flight_state = []
@@ -71,25 +76,32 @@ def main():
                         azimuth = random.uniform(azimuth_min, azimuth_max)
                         elevation = 90
                         forward_dir.append(sph2cart(elevation, azimuth))
-                # weather condition    
+                # weather condition
                 wind_speed = round(random.uniform(wind_speed_min, wind_speed_max), decimal_places)
                 down_wind = random.choice([True, False])
  
                 # generate drone audio
-                drone_signal, flight_path, state_speed, rpm_freqs = get_drone_signal(args.simple_noise, starting_point, flight_state, forward_dir, drone_type, wind_speed, down_wind, drone_loudness, drone_white_noise, signaltype, pulse_len, change_time, s_shape_coef, climb_speed_max, sink_speed_max, speed_min)
-                
-                # check if the drone always flies in this area 
+                drone_signal, flight_path, state_speed, rpm_freqs = get_drone_signal(
+                    args.simple_noise, starting_point, flight_state, forward_dir,
+                    drone_type, wind_speed, down_wind, drone_loudness,
+                    drone_white_noise, signaltype, pulse_len, change_time,
+                    s_shape_coef, climb_speed_max, sink_speed_max, speed_min
+                )
+
+                # check if the drone always flies in this area
                 flag = False
                 smoothing = 1e-6
                 for state in flight_path:
                     x_pos = state[0]
                     y_pos = state[1]
                     z_pos = state[2]
-                    if x_pos < x_min or x_pos > x_max or y_pos < (y_min - smoothing) or y_pos > (y_max + smoothing) or z_pos < (z_min - smoothing) or z_pos > (z_max + smoothing):
+                    if (x_pos < x_min or x_pos > x_max
+                            or y_pos < (y_min - smoothing) or y_pos > (y_max + smoothing)
+                            or z_pos < (z_min - smoothing) or z_pos > (z_max + smoothing)):
                         flag = True
                         break
                 if flag:
-                    continue 
+                    continue
 
                 # Compute RMS (Root Mean Square) energy
                 rms = np.sqrt(np.mean(drone_signal ** 2))
@@ -98,8 +110,9 @@ def main():
                 threshold_max = drone_loudness * 100
                 # Check if the audio volume is too low or high
                 if rms < threshold_min or rms > threshold_max:
-                    print(f"Warning: The audio volume is extremely low or high! Fail to generate signal using {drone_type}. Skip")
-                    continue 
+                    print(f"Warning: The audio volume is extremely low or high! "
+                          f"Fail to generate signal using {drone_type}. Skip")
+                    continue
 
                 # save data
                 now = datetime.datetime.now()
@@ -124,17 +137,20 @@ def main():
                     json.dump([drone_inf], json_file, indent=4)
                 iterations += 1
                 pbar.update(1)
-                
 
 
 # get one example of drone flight
 def get_example():
-    # generate drone signal 
-    drone_loudness = np.sqrt(loudness**2/pulse_len)
-    drone_signal, flight_path, state_speed, rpm_freqs = get_drone_signal(starting_point, flight_state, forward_dir, drone_type, wind_speed, down_wind, drone_loudness, drone_white_noise, signaltype, pulse_len, change_time, s_shape_coef, climb_speed_max, sink_speed_max, speed_min)
+    # generate drone signal
+    drone_loudness = np.sqrt(loudness**2 / pulse_len)
+    drone_signal, flight_path, state_speed, rpm_freqs = get_drone_signal(
+        starting_point, flight_state, forward_dir, drone_type, wind_speed,
+        down_wind, drone_loudness, drone_white_noise, signaltype, pulse_len,
+        change_time, s_shape_coef, climb_speed_max, sink_speed_max, speed_min
+    )
 
     # visualize the drone flight results in the 3d space
-    duration = flight_state[-1][-1] # seconds
+    duration = flight_state[-1][-1]  # seconds
     if drone_type == "S-9":
         num_rotor = 6
     else:
@@ -145,11 +161,11 @@ def get_example():
     plot_signal_spectrogram(drone_signal, sampling_rate, output_folder)
    
     # save data
-    folder_name = f"sample_example"
+    folder_name = "sample_example"
     output_wav_folder = os.path.join(output_folder, folder_name)
     os.makedirs(output_wav_folder, exist_ok=True)
     # save audio signals to wav file
-    filename = f"drone_sample.wav"
+    filename = "drone_sample.wav"
     sf.write(os.path.join(output_wav_folder, filename), drone_signal, sampling_rate)
     # write metadata to CSV file
     drone_inf = {
@@ -164,31 +180,43 @@ def get_example():
     with open(os.path.join(output_wav_folder, jason_name), "w") as json_file:
         json.dump([drone_inf], json_file, indent=4)
 
-# generate drone signal 
-def get_drone_signal(simple_noise_flag, starting_point, flight_state, forward_dir, drone_type, wind_speed, down_wind, drone_loudness, drone_white_noise, signaltype, pulse_len, change_time, s_shape_coef, climb_speed_max, sink_speed_max, speed_min):
+# generate drone signal
+def get_drone_signal(simple_noise_flag, starting_point, flight_state, forward_dir,
+                     drone_type, wind_speed, down_wind, drone_loudness,
+                     drone_white_noise, signaltype, pulse_len, change_time,
+                     s_shape_coef, climb_speed_max, sink_speed_max, speed_min):
     if drone_type == "S-9":
         num_rotor = 6
     else:
         num_rotor = 4
-    duration = flight_state[-1][-1] # seconds
+    duration = flight_state[-1][-1]  # seconds
     # get the fight path and RPM of the drone
-    flight_path, rpm_std, state_speed = getFlightPath(starting_point, flight_state, drone_type, forward_dir, wind_speed, down_wind, climb_speed_max, sink_speed_max, speed_min)
+    flight_path, rpm_std, state_speed = getFlightPath(
+        starting_point, flight_state, drone_type, forward_dir, wind_speed,
+        down_wind, climb_speed_max, sink_speed_max, speed_min
+    )
     rpm_matrix = flightstate2RPM(flight_state, state_speed, climb_speed_max, sink_speed_max, drone_type)
     # get the drone signal
-    freq_mod = get_micro_modulation(duration, sampling_rate, modulation_range, seg_dura_min, seg_dura_max) 
-    drone_signal, rpm_freqs = getFullDroneSignal(simple_noise_flag, flight_state, rpm_matrix, rpm_std, freq_mod, sampling_rate, drone_loudness, drone_type, signaltype, drone_white_noise, num_rotor, change_time, s_shape_coef, pulse_len)
+    freq_mod = get_micro_modulation(duration, sampling_rate, modulation_range, seg_dura_min, seg_dura_max)
+    drone_signal, rpm_freqs = getFullDroneSignal(
+        simple_noise_flag, flight_state, rpm_matrix, rpm_std, freq_mod,
+        sampling_rate, drone_loudness, drone_type, signaltype,
+        drone_white_noise, num_rotor, change_time, s_shape_coef, pulse_len
+    )
     return drone_signal, flight_path, state_speed, rpm_freqs
-
 
 
 if __name__ == '__main__':
     # Generate a dataset consisting of a variable number (e.g., 1000-100000) of different drone situations
     # (flight paths, drone types, wind types...) and the resulting audio files.
     parser = argparse.ArgumentParser(description='Generate a dataset of drone audio files.')
-    parser.add_argument('--num', type=int, default=5, help='Number of samples to generate different drone flight situations') 
-    parser.add_argument('--exp', type=str, default='exp_test', help='Enter experiment ID')   
-    parser.add_argument('--simple_noise', action='store_true', help='If set, the UAV signal will be simplified to white noise.')
-    parser.add_argument('--drone_data', type=str, default='DroneAudioData', help='Path to the drone data file')  
+    parser.add_argument('--num', type=int, default=5,
+                        help='Number of samples to generate different drone flight situations')
+    parser.add_argument('--exp', type=str, default='exp_test', help='Enter experiment ID')
+    parser.add_argument('--simple_noise', action='store_true',
+                        help='If set, the UAV signal will be simplified to white noise.')
+    parser.add_argument('--drone_data', type=str, default='DroneAudioData',
+                        help='Path to the drone data file')
     # generate one example of drone flight for reference, all results saved in "example" folder
     parser.add_argument('--example', action='store_true', help='Enable give an example of drone flight')
 
@@ -210,10 +238,10 @@ if __name__ == '__main__':
             with open(hyperpara_path, 'r') as yamlfile:
                 hyperparams = yaml.safe_load(yamlfile)
         else:
-            default_hyperpara_path = abspath +'/exp_config.yaml'
+            default_hyperpara_path = os.path.join(abspath, 'exp_config.yaml')
             shutil.copyfile(default_hyperpara_path, hyperpara_path)
             with open(hyperpara_path, 'r') as yamlfile:
-                hyperparams = yaml.safe_load(yamlfile)            
+                hyperparams = yaml.safe_load(yamlfile)
         # Access hyperparameters
         speed_of_sound = hyperparams['speed_of_sound']
         sampling_rate = hyperparams['sampling_rate']
@@ -261,7 +289,7 @@ if __name__ == '__main__':
         state_dur_updown_max = hyperparams["state_dur_updown_max"]
         state_dur_hover_min = hyperparams["state_dur_hover_min"]
         state_dur_hover_max = hyperparams["state_dur_hover_max"]
-        state_dur_forward_min = hyperparams["state_dur_forward_min"]     
+        state_dur_forward_min = hyperparams["state_dur_forward_min"]
         state_dur_forward_max = hyperparams["state_dur_forward_max"]
         # wind speed range (m/s)
         wind_speed_min = hyperparams["wind_speed_min"]
@@ -298,6 +326,5 @@ if __name__ == '__main__':
         climb_speed_max = example_params['climb_speed_max']
         sink_speed_max = example_params['sink_speed_max']
         speed_min = example_params['speed_min']
-
 
     main()
