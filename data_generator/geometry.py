@@ -1,3 +1,9 @@
+# geometry.py
+# This code provides geometric utility functions for coordinate transformations
+# and spatial calculations in data generation.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import numpy as np
 
 # Calculate the symmetrical point of a given point about a plane
@@ -30,13 +36,13 @@ def cart2sph(vector):
 
     # Calculate azimuth angle
     azimuth_angle = np.degrees(np.arctan2(vector[1], vector[0]))
-    azimuth_angle = (azimuth_angle + 360) if azimuth_angle<0 else azimuth_angle
+    azimuth_angle = (azimuth_angle + 360) if azimuth_angle < 0 else azimuth_angle
     return [elevation_angle, azimuth_angle]
 
 # Create a grid of possible source directions
 # Generate evenly distributed points on the spherical surface
-#  n is the amount of directions    
-def half_fibonacci_sphere(n):  
+# n is the amount of directions
+def half_fibonacci_sphere(n):
     n *= 2
 
     golden_angle = np.pi * (3 - np.sqrt(5))
@@ -45,21 +51,21 @@ def half_fibonacci_sphere(n):
     radius = np.sqrt(1 - z * z)
 
     points = np.zeros((n, 3))
-    points[:,0] = radius * np.cos(theta)
-    points[:,1] = radius * np.sin(theta)
-    points[:,2] = z
+    points[:, 0] = radius * np.cos(theta)
+    points[:, 1] = radius * np.sin(theta)
+    points[:, 2] = z
 
     points = points[points[:, 2] >= 0]
     return np.transpose(points)
 
-def fibonacci_sphere(n):  
+def fibonacci_sphere(n):
     golden_angle = np.pi * (3 - np.sqrt(5))
     theta = golden_angle * np.arange(n)
     z = np.linspace(1 - 1.0 / n, 1.0 / n - 1, n)
     radius = np.sqrt(1 - z * z)
 
     points = np.zeros((n, 3))
-    points[:,0] = radius * np.cos(theta)
-    points[:,1] = radius * np.sin(theta)
-    points[:,2] = z
+    points[:, 0] = radius * np.cos(theta)
+    points[:, 1] = radius * np.sin(theta)
+    points[:, 2] = z
     return np.transpose(points)

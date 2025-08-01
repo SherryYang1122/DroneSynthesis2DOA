@@ -1,3 +1,9 @@
+# data_generator_main.py
+# This code generates synthetic drone audio data with spatial information 
+# for training DOA estimation models.
+# (c) 2025, X. Yang, Fraunhofer IDMT, Germany, MIT License
+# version 1.0, August 2025
+
 import numpy as np
 import argparse
 #import matplotlib.pyplot as plt
@@ -28,13 +34,13 @@ def main():
         # get_example(), ......(this part remains)
         return None
     else:
-        # creat a folder to save the results
+        # create a folder to save the results
         output_folder = os.path.join(result_dir, args.output)
         if os.path.exists(output_folder):
             shutil.rmtree(output_folder)
         os.makedirs(output_folder, exist_ok=True)
 
-        # get basic paramters 
+        # get basic parameters 
         drone_data_folder = args.drone_data
         env_folder = args.env_path
         mic_jason = "mic_config.json"
@@ -81,7 +87,7 @@ def main():
                 random_drone = drone_data[0]
                 state_num = len(random_drone["flight_path"])
                 audio_sample_path = os.path.join(random_drone_dir, random_drone['drone_source'])
-                drone_signal, _ = librosa.load(audio_sample_path, sr = sampling_rate)
+                drone_signal, _ = librosa.load(audio_sample_path, sr=sampling_rate)
 
                 # get fight path
                 flight_path = random_drone['flight_path']
@@ -90,9 +96,9 @@ def main():
                 flag = False
                 if args.wall:
                     # Check if the drone is within the valid area
-                    for i in range(state_num)-1:
+                    for i in range(state_num - 1):
                         dot_product1 = np.dot(drone_position[i], wall_coeff[:3]) + wall_coeff[3]
-                        dot_product2 = np.dot(drone_position[i+1], wall_coeff[:3]) + wall_coeff[3]
+                        dot_product2 = np.dot(drone_position[i + 1], wall_coeff[:3]) + wall_coeff[3]
                         if dot_product1 * dot_product2 < 0:
                             flag = True
                             break
@@ -107,7 +113,7 @@ def main():
                 if env_folder != '':
                     selected_file = random.choice(env_wav_files)
                     env_wav_path = os.path.join(env_path, selected_file)
-                    env_noise, _ = librosa.load(env_wav_path, sr = sampling_rate, mono=False)
+                    env_noise, _ = librosa.load(env_wav_path, sr=sampling_rate, mono=False)
                     env_noise = np.array(env_noise)
                     max_start = env_noise.shape[1] - signal.shape[1]
                     SNR = random.choice(SNR_values)
@@ -122,7 +128,7 @@ def main():
                     else:
                         n_repeats = int(np.ceil(signal.shape[1] / env_noise.shape[1]))
                         repeated_env_noise = np.tile(env_noise, (1,n_repeats))
-                        max_start = repeated_env_noise.shape[1] -  signal.shape[1]
+                        max_start = repeated_env_noise.shape[1] - signal.shape[1]
                         start_point = int(np.random.uniform(0, max_start))
                         end_point = start_point + signal.shape[1]
                         snr_temp = calculate_snr(drone_signal, repeated_env_noise[0, start_point:start_point+len(drone_signal)])
