@@ -1,4 +1,9 @@
-# SELD-Net 
+# The SELDnet architecture
+# Based on https://github.com/sharathadavanne/doa-net with modifications.
+# Combines ideas from:
+# - Shimada et al. (2020): "ACCDOA: Activity-Coupled Cartesian Direction of Arrival Representation for Sound Event Localization and Detection" 
+# - Adavanne et al. (2018): "Sound Event Localization and Detection of Overlapping Sources Using Convolutional Recurrent Neural Networks"
+
 
 import torch
 import torch.nn as nn
