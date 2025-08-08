@@ -1,8 +1,11 @@
+# Neural-SRP model
+# Based on code from https://github.com/egrinstein/neural_srp
+# Originates from the paper:
+# "The Neural-SRP Method for Universal Robust Multi-Source Tracking"
+
 import numpy as np
 import torch
 import torch.nn as nn
-
-# from torchinfo import summary
 from layers import Mlp
 
 
