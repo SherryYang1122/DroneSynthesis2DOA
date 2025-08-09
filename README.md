@@ -103,6 +103,19 @@ python neural_doa/neural_main.py \
 ```
 PS: MicArrayDataReal30s only contains azimuth (azi) angle, no elevation.
 
+### `input_feature` Options
+In addition to standard features, `input_feature` can also be:
+
+- **`GCC_PHAT_mask`**  
+  Applies a binary frequency mask (250 Hz–7000 Hz) in GCC-PHAT to retain relevant components and suppress noise.
+
+- **`GCC_PHAT_beta`**  
+  Adds a weighting factor **β** to GCC-PHAT to retain partial magnitude information and improve robustness in low-SNR conditions.  
+  Default: **0.7**.
+
+- **`GCC_PHAT_beta_mask`**  
+  Combines both enhancements for improved performance.
+
 ## 5️⃣ Traditional DOA Estimation (SRP-PHAT)
 Use signal processing methods for comparison:
 ```bash
