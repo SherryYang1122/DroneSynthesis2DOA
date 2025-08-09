@@ -18,6 +18,17 @@ python doa_runner_main.py --exp exp.. --algorithm srp_phat
 
 The results are saved in this folder **Data/exp../DOA_xxx** such as **Data/exp../DOA_srp_phat** which depends on the algorithm.
 
+Optional flags, which are explained in the corresponding paper: 
+```bash
+--beta
+--mask
+```
+
+**beta** Adds a weighting factor β to GCC-PHAT to retain partial magnitude information, improving robustness in low-SNR conditions. Default: 0.7.
+
+**mask** Applies a binary frequency mask (250 Hz–7000 Hz) in GCC-PHAT to keep relevant components and suppress noise.
+Both options can be used together for enhanced performance.
+
 ## 📝 Citation
 If you use any files of this repository, please cite:
 
