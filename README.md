@@ -90,6 +90,16 @@ python neural_doa/neural_main.py \
   --data_file_test MicArrayDataTest \
   --is_training
 ```
+**`input_feature` Options**
+In addition to standard features, `input_feature` can also be:
+- **`GCC_PHAT_mask`**  
+  Applies a binary frequency mask (250 Hz–7000 Hz) in GCC-PHAT to retain relevant components and suppress noise.
+- **`GCC_PHAT_beta`**  
+  Adds a weighting factor **β** to GCC-PHAT to retain partial magnitude information and improve robustness in low-SNR conditions.  
+  Default: **0.7**.
+- **`GCC_PHAT_beta_mask`**  
+  Combines both enhancements for improved performance.
+  
 Evaluate on real-world drone recordings. MicArrayDataReal30s is a real dataset provided by Fraunhofer IDMT (preprocessed).
 [Insert download link here]. 
 Please put it at exps/args.exp and run:
@@ -103,18 +113,6 @@ python neural_doa/neural_main.py \
 ```
 PS: MicArrayDataReal30s only contains azimuth (azi) angle, no elevation.
 
-### `input_feature` Options
-In addition to standard features, `input_feature` can also be:
-
-- **`GCC_PHAT_mask`**  
-  Applies a binary frequency mask (250 Hz–7000 Hz) in GCC-PHAT to retain relevant components and suppress noise.
-
-- **`GCC_PHAT_beta`**  
-  Adds a weighting factor **β** to GCC-PHAT to retain partial magnitude information and improve robustness in low-SNR conditions.  
-  Default: **0.7**.
-
-- **`GCC_PHAT_beta_mask`**  
-  Combines both enhancements for improved performance.
 
 ## 5️⃣ Traditional DOA Estimation (SRP-PHAT)
 Use signal processing methods for comparison:
@@ -124,16 +122,12 @@ python doa_estimator/doa_runner_main.py \
   --algorithm srp_phat \
   --dataset MicArrayDataTest
 ```
-Optional flags, which are explained in the corresponding paper: 
+Optional flags, which are explained in the corresponding paper and 4️⃣ Neural Network DOA Estimation: 
 ```bash
 --beta
 --mask
 ```
-
-**beta** Adds a weighting factor β to GCC-PHAT to retain partial magnitude information, improving robustness in low-SNR conditions. Default: 0.7.
-
-**mask** Applies a binary frequency mask (250 Hz–7000 Hz) in GCC-PHAT to keep relevant components and suppress noise.
-Both options can be used together for enhanced performance.
+Both options can also be used together for enhanced performance.
 
 ## 6️⃣ Evaluation for Traditional DOA Estimation Methods
 Evaluate predictions vs ground truth on signal processing methods:
