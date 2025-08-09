@@ -116,6 +116,12 @@ Optional flags, which are explained in the corresponding paper:
 --beta
 --mask
 ```
+beta: Adds a weighting factor β to GCC-PHAT to retain partial magnitude information, improving robustness in low-SNR conditions. Default: 0.7.
+
+mask: Applies a binary frequency mask (250 Hz–7000 Hz) in GCC-PHAT to keep relevant components and suppress noise.
+
+Both options can be used together for enhanced performance.
+
 ## 6️⃣ Evaluation for Traditional DOA Estimation Methods
 Evaluate predictions vs ground truth on signal processing methods:
 ```bash
