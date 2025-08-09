@@ -127,6 +127,7 @@ Optional flags, which are explained in the corresponding paper and 4️⃣ Neura
 --beta
 --mask
 ```
+beta means using the techique `GCC_PHAT_beta` in srp and mask means using `GCC_PHAT_mask`.
 Both options can also be used together for enhanced performance.
 
 ## 6️⃣ Evaluation for Traditional DOA Estimation Methods
