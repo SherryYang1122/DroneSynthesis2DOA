@@ -10,7 +10,7 @@ Due to the scarcity of real-world drone audio data, we simulate drone flight aud
 - `drone_generator/`: Generate synthetic drone audio
 - `mic_array/`: Define and simulate microphone array configurations
 - `data_generator/`: Generate microphone array data using drone + background signals
-- `neural_doa/`: Neural DOA model training and evaluation
+- `neural_doa/`: Neural DOA models' training and evaluation
 - `doa_estimator/`: Traditional signal processing DOA estimators (e.g., SRP-PHAT)
 - `evaluation/`: Performance evaluation and visualization for signal processing methods
 
