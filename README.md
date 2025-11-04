@@ -1,7 +1,7 @@
 # DroneSynthesis2DOA (Drone Signal Synthesis and Localization)
 
 This project focuses on **Drone Localization and Tracking using Acoustic Arrays and Machine Learning Algorithms**.  
-Due to the scarcity of real-world drone audio data, we simulate realistic drone flight signals for training ML models, and later validate them using actual drone recordings.
+Due to the scarcity of real-world drone audio data, we simulate drone flight audio signals for training ML models, and later validate them using actual drone recordings.
 
 ---
 
