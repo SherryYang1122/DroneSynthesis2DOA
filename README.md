@@ -160,6 +160,4 @@ Maintainer: SherryYang1122
 
 ## 📝 Citation
 If you use any files of this repository, please cite:
-
-Yang, X., Naylor, P. A., Doclo, S., Bitzer, J., 
-"NEURAL DRONE LOCALIZATION EXPLOITING SIGNAL SYNTHESIS OF REAL-WORLD AUDIO DATA", Eusipco 2025, Italy
+X. Yang, P. Naylor, S. Doclo, J. Bitzer, Neural Drone Localization Exploiting Signal Synthesis of Real-World Audio Data, in Proc. European Signal Processing Conference (EUSIPCO), Palermo, Italy, Sep. 2025, pp. 256-260.
