@@ -156,7 +156,7 @@ There is a Jupyter Notebook `exp_runner.ipynb` file so you can run the command c
 
 ## 📫 Contact
 For any questions or contributions, feel free to reach out.
-Maintainer: Name / GitHub Handle
+Maintainer: SherryYang1122
 
 ## 📝 Citation
 If you use any files of this repository, please cite:
